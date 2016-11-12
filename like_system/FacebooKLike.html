@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>Status message design with CSS</title> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){  
+
+$(".like").click(function()
+{
+var ID = $(this).attr("id");
+var sid=ID.split("like"); 
+var New_ID=sid[1];
+var REL = $(this).attr("rel");
+//var URL=$.base_url+'message_like_ajax.php';
+var dataString = 'msg_id=' + New_ID +'&rel='+ REL;
+
+
+if(REL=='Like')
+{
+$("#youlike"+New_ID).slideDown('slow').prepend("<span id='you"+New_ID+"'><a href='#'>You</a> like this.</span>");
+$("#likes"+New_ID).prepend("<span id='you"+New_ID+"'><a href='#'>You</a>, </span>");
+$('#'+ID).html('Unlike').attr('rel', 'Unlike').attr('title', 'Unlike');
+
+}
+else
+{
+$("#youlike"+New_ID).slideUp('slow');
+$("#you"+New_ID).remove();
+$('#'+ID).attr('rel', 'Like').attr('title', 'Like').html('Like');
+}
+
+});
+
+});
+</script>
+<style> 
+body
+{
+font-family:Arial, Helvetica, sans-serif;
+}
+a
+{
+text-decoration:none;
+color:#006699;
+}
+a:hover
+{
+text-decoration:underline;
+}
+#container
+{
+margin:0 auto;
+width:600px;
+}
+.stbody
+{
+min-height:70px;
+ 
+}
+.stbody
+{
+min-height:70px;
+margin-bottom:10px;
+border-bottom:dashed 1px #cc0000;
+}
+.stimg
+{
+float:left;
+height:50px;
+width:50px;
+border:solid 1px #dedede;
+}
+.sttext
+{
+margin-left:70px;
+ 
+min-height:50px;
+word-wrap:break-word;
+overflow:hidden;
+padding:5px;
+display:block;
+
+}
+.sttime
+{
+font-size:11px;
+color:#999;
+
+margin-top:5px;
+}
+.likeUsers
+{
+margin:10px 0px 10px 0px;
+}
+
+</style> 
+</head> 
+ 
+<body> 
+ 
+
+<div id='container'> 
+<div> Follow <a href='http://www.9lessons.info'>9lessons.info</a></div> 
+<h1>Facebook Style Like System.</h1> 
+
+	
+	<div class="stbody" id="stbody101"> 
+	<div class="stimg"> 
+	<img src="https://lh6.googleusercontent.com/-324HWGYKfVw/UZKIZ5SU3rI/AAAAAAAAHok/JJrBwqrS1dQ/s80/SrinivasTamada.jpg" style='width:50px;height:50px'/> 
+	</div> 
+	<div class="sttext"> 
+	Make People fall in love with your IDEAS
+	<div class="sttime">2 seconds ago</div> 
+	<div>
+	<a href="#" class="like" id="like101" title="like" rel="like">Like</a>
+	</div>
+
+	<div class='likeUsers' id="youlike101" >
+	</div>
+
+	</div> 
+	</div>
+	
+	
+	<div class="stbody"> 
+	<div class="stimg"> 
+	<img src="https://lh6.googleusercontent.com/-324HWGYKfVw/UZKIZ5SU3rI/AAAAAAAAHok/JJrBwqrS1dQ/s80/SrinivasTamada.jpg" style='width:50px;height:50px'/> 
+	</div> 
+	<div class="sttext"> 
+	9lessons Programming Blog <a href='http://9lessons.info'>http://www.9lessons.info</a>
+	<div class="sttime">25 seconds ago</div> 
+	<div>
+	<a href="#" class="like" id="like102" title="Unlike" rel="Unlike">Unlike</a>
+	</div>
+
+	<div class='likeUsers' id="youlike102">
+	<span id="you102"><a href="#">You</a> like this.</span>
+	</div>
+
+	</div> 
+	</div>
+	
+
+
+
+<div class="stbody"> 
+<div class="stimg"> 
+<img src="https://lh6.googleusercontent.com/-324HWGYKfVw/UZKIZ5SU3rI/AAAAAAAAHok/JJrBwqrS1dQ/s80/SrinivasTamada.jpg" style='width:50px;height:50px'/> 
+</div> 
+<div class="sttext"> 
+My Facebook profile <a href='http://www.facebook.com/srinivas.tamada'>http://www.facebook.com/srinivas.tamada</a>
+<div class="sttime">48 seconds ago</div> 
+<div>
+<a href="#" class="like" id="like103" title="Unlike" rel="Unlike">Unlike</a>
+</div>
+
+<div class='likeUsers' id="likes103">
+<span id="you103"><a href="#">You</a>,</span> <a href="#">Srinivas</a>, <a href="#">Harsha</a>, <a href="#">Bill Gates</a> and 20 other friends like this.
+</div>
+
+</div> 
+</div>
+
+
+
+ 
+</div> 
+
+
+</body> 
+</html> 
