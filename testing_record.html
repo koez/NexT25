@@ -1,0 +1,50 @@
+//record user 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Record User</title>
+
+<script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script>
+<script src="https://cdn.webrtc-experiment.com/gumadapter.js"></script>
+</head>
+<body>
+<button class="btn btn-success">Start Recording</button>
+
+<video controls autoplay loop></video>
+<video autoplay loop></video>
+</body>
+</html>
+
+<script>
+function successCallback(stream){
+  document.querySelector('video').src = URL.createObjectURL(stream);
+  document.querySelector('video').muted = true;
+  
+  var recorder = RecordRTC(stream, { 
+  type: 'video'
+ });
+ recorder.startRecording();
+ 
+ setTimeout(function(){
+ 		recorder.stopRecording(function(){
+   var blob = recorder.blob;
+   var url = URL.createObjectURL(blob);
+   document.querySelector('video').src = url;
+   document.querySelector('video').muted = false;
+ });
+ }, 11 * 1000);
+}
+
+function errorCallback(error){
+  alert(error);
+}
+
+var mediaConstraints = { video: true, audio: true};
+
+navigator.mediaDevices.getUserMedia(mediaConstraints).then(successCallback).catch(errorCallback);
+
+//loop video manually
+//$("#video").bind("ended", function(){
+	//this.play();
+</script>
+});
