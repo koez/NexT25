@@ -1,6 +1,4 @@
-Author: CodexWorld
-Author URL: www.codexworld.com
-Author Email: contact@codexworld.com
+
 
 Instructions::
 
@@ -13,3 +11,6 @@ Instructions::
 
 
 *** If you have any trouble, then feel free to contact CodexWorld. Send your query at the "contact@codexworld.com" email address. Also you can post your valuable comments at the tutorial page.
+
+
+Source: www.codexworld.com
