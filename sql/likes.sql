@@ -1,0 +1,4 @@
+CREATE TABLE 'likes' (
+	`likesId` INT(50) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`click` int NOT NULL
+);
