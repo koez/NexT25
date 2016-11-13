@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NexT 25 Video Form</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="band.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="idea_count.js"></script>
+
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#myPage">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#myPage">HOME</a></li>
+        <li><a href="#band">INVESTOR</a></li>
+        <li><a href="#tour">TRENDING</a></li>
+        <li><a href="#contact">ABOUT</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Merchandise</a></li>
+            <li><a href="#">Extras</a></li>
+            <li><a href="#">Media</a></li>
+          </ul>
+        </li>
+        <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <h2>Submit Your Idea</h2>
+  <form class="form-horizontal" method="post" enctype="multipart/form-data">
+	<div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Name:</label>
+      <div class="col-sm-10">
+       <input type="password" class="form-control" id="pwd" placeholder="What Should We Called You?" class="form-control input-md" required="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Email:</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="email" placeholder="Enter email" class="form-control input-md" required="">
+      </div>
+    </div>
+	 <div class="form-group">
+      <label class="control-label col-sm-2" for="category">Title:</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="cat" placeholder="State Your Idea's Title" class="form-control input-md" required="">
+      </div>
+    </div>
+	<div class="form-group">
+      <label class="control-label col-sm-2" for="category">Video:</label>
+      <div class="col-sm-10">
+        <input type="file" name="video" accept="video/*" required="" capture>
+      </div>
+    </div>
+	 <div id="wrapper">
+	 <div class="form-group">
+      <label class="control-label col-sm-2" for="details">Explain Idea:</label>
+      <div class="col-sm-10">
+        <input type="text" maxlength="140" placeholder="Explain Your Idea Within 25 Words" class="form-control input-md" required="">
+      </div>
+    </div>
+	</div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-success">Submit Now!</button>
+      </div>
+    </div>
+  </form>
+</div>
