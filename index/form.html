@@ -4,10 +4,55 @@
   <title>NexT 25 Video Form</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="band.css">
+   <link rel="stylesheet" href="video.css">
+  <link rel="stylesheet" href="voting.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <style>
+body {font-family: "Lato", sans-serif;}
+
+ul.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Float the list items side by side */
+ul.tab li {float: left;}
+
+/* Style the links inside the list items */
+ul.tab li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of links on hover */
+ul.tab li a:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+ul.tab li a:focus, .active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="idea_count.js"></script>
@@ -23,14 +68,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#myPage">Logo</a>
+      <a class="navbar-brand" href="video.html">NexT25</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#myPage">HOME</a></li>
-        <li><a href="#band">INVESTOR</a></li>
-        <li><a href="#tour">TRENDING</a></li>
-        <li><a href="#contact">ABOUT</a></li>
+        <li><a href="video.html">HOME</a></li>
+        <li><a href="video.html">INVESTOR</a></li>
+        <li><a href="video.html">TRENDING</a></li>
+        <li><a href="video.html">ABOUT</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE
           <span class="caret"></span></a>
@@ -40,13 +85,21 @@
             <li><a href="#">Media</a></li>
           </ul>
         </li>
+		<li><a href="form.html" class="btn btn-success">POST IDEA</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
       </ul>
     </div>
   </div>
 </nav>
 <div class="container">
-  <h2>Submit Your Idea</h2>
+
+<ul class="tab">
+  <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Submit')" id="defaultOpen">Submit Existing Video</a></li>
+  <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Crop')">Crop Video</a></li>
+</ul>
+
+<div id="Submit" class="tabcontent">
+   <h2>Submit Your Idea</h2>
   <form class="form-horizontal" method="post" enctype="multipart/form-data">
 	<div class="form-group">
       <label class="control-label col-sm-2" for="pwd">Name:</label>
@@ -69,7 +122,7 @@
 	<div class="form-group">
       <label class="control-label col-sm-2" for="category">Video:</label>
       <div class="col-sm-10">
-        <input type="file" name="video" id="files" accept="video/*" required="" capture>
+        <input type="file" name="video" accept="video/*" required="" capture>
       </div>
     </div>
 	 <div id="wrapper">
@@ -87,9 +140,59 @@
     </div>
   </form>
 </div>
-	</body>
+
+<div id="Crop" class="tabcontent">
+<form class="form-horizontal" method="post" enctype="multipart/form-data">
+   <div class="form-group">
+      <label class="control-label col-sm-2" for="name">Name:</label>
+      <div class="col-sm-10">
+       <input type="text" class="form-control" id="vid_name" placeholder="Video Name?" class="form-control input-md" required="">
+      </div>
+    </div> 
+	<div class="form-group">
+      <label class="control-label col-sm-2" for="video">Video:</label>
+      <div class="col-sm-10">
+       <input type="file" class="form-control" id="files" class="form-control input-md" required="">
+	   <output id="list"></output>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="duration">Duration From:</label>
+      <div class="col-sm-10">
+        <input type="range" min="1" max="10" value="5" id="fader" step="0" oninput="outputUpdate(value)" class="form-control" id="duration" placeholder="Seconds For The Video To Be Cut" class="form-control input-md" required="">
+		 <output for="fader" id="volume">5</output>
+      </div>
+    </div> 
+   <div align="center" class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-success">Crop!</button>
+		<button type="submit" class="btn btn-default">Cancel</button>
+      </div>
+   </div>
+  </form>
+</div>
+ 
+</div>
+</body>
 </html>
 <script>
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
 function handleFileSelect(evt) {
     var files = evt.target.files;
 
@@ -126,4 +229,8 @@ function handleFileSelect(evt) {
   }
 
   document.getElementById('files').addEventListener('change', handleFileSelect, false);
+  
+function outputUpdate(vol) {
+	document.querySelector('#duration').value = vol;
+}
 </script>
