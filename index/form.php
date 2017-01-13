@@ -1,5 +1,5 @@
 <?php 
-$con = mysqli_connect('localhost','root','','next25') or die('Error Connection');
+$con = mysqli_connect('localhost','root','','') or die('Error Connection');
 $sql = "INSERT INTO tbl_video(id, video_name, video_title, description)";
 
 	if(isset($_POST["insert_video"])){
@@ -19,7 +19,7 @@ $sql = "INSERT INTO tbl_video(id, video_name, video_title, description)";
 	
 	$insert_video = mysqli_query($con, "INSERT INTO tbl_video(video_name, email, video_title, video_blob, description, video_keywords) VALUES('$video_name','$email','$video_title','$video_blob','$description','$video_keywords')")  or die(mysqli_error($con));
 	 
-	   echo "Your information has been successfully added to the database.";;
+	   echo "Your information has been successfully added to the database.";
 	
 	//$result = mysqli_query($con, $insert_video);
 				
