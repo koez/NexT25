@@ -1,14 +1,14 @@
 <?php 
-$con = mysqli_connect("localhost","root","","next25");
-$sql = "INSERT INTO video(id, video_name, video_title, description)";
+$con = mysqli_connect('localhost','root','','next25') or die('Error Connection');
+$sql = "INSERT INTO tbl_video(id, video_name, video_title, description)";
 
-	if(isset($_POST['insert_video'])){
+	if(isset($_POST["insert_video"])){
 	//get the video_details
-	$video_name     = $_POST['video_name'];
-	$email          = $_POST['email'];
-	$video_title    = $_POST['video_title'];
-	$description    = $_POST['description'];
-	$video_keywords = $_POST['video_keywords'];
+	$video_name     = mysqli_real_escape_string($con, $_POST['video_name']);
+	$email          = mysqli_real_escape_string($con, $_POST['email']);
+	$video_title    = mysqli_real_escape_string($con, $_POST['video_title']);
+	$description    = mysqli_real_escape_string($con, $_POST['description']);
+	$video_keywords = mysqli_real_escape_string($con, $_POST['video_keywords']);
 	
 	//getting the video
 	$video_blob = $_FILES['video_blob']['name'];
@@ -16,10 +16,16 @@ $sql = "INSERT INTO video(id, video_name, video_title, description)";
 	
 	move_uploaded_file($video_blob_tmp, "../video/video_blob/$video_title");
 	
-	$insert_video = "INSERT INTO video(id, video_name, video_title, description, video_keywords) VALUES('$id','video_name','video_title','description','keyword')";
 	
-	$insert_vid = mysqli_query($con, $insert_video);
+	$insert_video = mysqli_query($con, "INSERT INTO tbl_video(video_name, email, video_title, video_blob, description, video_keywords) VALUES('$video_name','$email','$video_title','$video_blob','$description','$video_keywords')")  or die(mysqli_error($con));
+	 
+	   echo "Your information has been successfully added to the database.";;
+	
+	//$result = mysqli_query($con, $insert_video);
+				
 	}
+	
+	mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -161,38 +167,44 @@ ul.tab li a:focus, .active {
 	<div class="form-group">
       <label class="control-label col-sm-2" for="name">Name:</label>
       <div class="col-sm-10">
-       <input type="text" class="form-control" id="name" placeholder="What Should We Called You?" class="form-control input-md" required="">
+       <input type="text" class="form-control" id="video_name" name="video_name" placeholder="What Should We Called You?" class="form-control input-md" required="">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="email">Email:</label>
       <div class="col-sm-10">
-        <input type="email" class="form-control" id="email" placeholder="Enter email" class="form-control input-md" required="">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" class="form-control input-md" required="">
       </div>
     </div>
 	 <div class="form-group">
-      <label class="control-label col-sm-2" for="category">Title:</label>
+      <label class="control-label col-sm-2" for="title">Title:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="cat" placeholder="State Your Idea's Title" class="form-control input-md" required="">
+        <input type="text" class="form-control" id="title" name="video_title" id="video_title" placeholder="State Your Idea's Title" class="form-control input-md" required="">
       </div>
     </div>
 	<div class="form-group">
       <label class="control-label col-sm-2" for="category">Video:</label>
       <div class="col-sm-10">
-        <input type="file" name="video" id="files" accept="video/*" required="" capture>
+        <input type="file" name="video_blob" id="files" accept="video/*" required="" capture>
       </div>
     </div>
 	 <div id="wrapper">
 	 <div class="form-group">
       <label class="control-label col-sm-2" for="details">Explain Idea:</label>
       <div class="col-sm-10">
-        <textarea maxlength="140" placeholder="Explain Your Idea Within 25 Words" class="form-control input-md" required=""></textarea>
+        <textarea maxlength="140" name="description" id="description" placeholder="Explain Your Idea Within 25 Words" class="form-control input-md" required=""></textarea>
       </div>
     </div>
 	</div>
+	<div class="form-group">
+      <label class="control-label col-sm-2" for="keywords">Keywords:</label>
+      <div class="col-sm-10">
+       <input type="text" class="form-control" id="video_keywords" name="video_keywords" placeholder="Tag your video keywords" class="form-control input-md" required="">
+      </div>
+    </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-success">Submit Now!</button>
+        <button type="submit" name="insert_video" id="insert_video" class="btn btn-success">Submit Now!</button>
       </div>
     </div>
   </form>
